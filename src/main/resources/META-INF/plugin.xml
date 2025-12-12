@@ -1,0 +1,46 @@
+<idea-plugin>
+    <id>com.zoowayss.antigravity.switch2antigravity</id>
+    <name>Switch to Antigravity</name>
+    <vendor email="zoowayss@gmail.com" url="https://github.com/zoowayss">Zoowayss</vendor>
+
+    <description><![CDATA[
+    Open your current project or file in Antigravity with a single click.
+    <br/>
+    <br/>
+    Features:
+    <ul>
+        <li>Open current file in Antigravity from editor context menu</li>
+        <li>Open entire project in Antigravity from project view</li>
+        <li>Quick access from Tools menu</li>
+    </ul>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <actions>
+        <!-- Open File in Antigravity -->
+        <action id="com.zoowayss.antigravity.OpenFileInAntigravity"
+                class="com.zoowayss.antigravity.OpenFileInAntigravityAction"
+                text="Open in Antigravity"
+                description="Open current file in Antigravity"
+                icon="AllIcons.Actions.Execute">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+
+        <!-- Open Project in Antigravity -->
+        <action id="com.zoowayss.antigravity.OpenProjectInAntigravity"
+                class="com.zoowayss.antigravity.OpenProjectInAntigravityAction"
+                text="Open Project in Antigravity"
+                description="Open entire project in Antigravity"
+                icon="AllIcons.Actions.Execute">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.zoowayss.antigravity.AntigravityService"/>
+    </extensions>
+</idea-plugin>
