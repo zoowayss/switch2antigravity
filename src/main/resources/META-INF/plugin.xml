@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.zoowayss.antigravity.switch2antigravity</id>
     <name>Switch to Antigravity</name>
-    <vendor email="zoowayss@gmail.com" url="https://github.com/zoowayss">Zoowayss</vendor>
+    <vendor email="zoowayss@gmail.com" url="https://github.com/zoowayss">zoowayss</vendor>
 
     <description><![CDATA[
     Open your current project or file in Antigravity with a single click.

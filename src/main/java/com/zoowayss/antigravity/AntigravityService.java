@@ -66,7 +66,6 @@ public final class AntigravityService {
         }
 
         // 4. Fall back to default path
-        cachedAntigravityPath = DEFAULT_ANTIGRAVITY_PATH;
         return DEFAULT_ANTIGRAVITY_PATH;
     }
 
@@ -104,6 +103,10 @@ public final class AntigravityService {
     }
 
     public void openInAntigravity(String path) {
+        openInAntigravity(path, -1);
+    }
+
+    public void openInAntigravity(String path, int lineNumber) {
         String antigravityPath = getAntigravityPath();
 
         // Verify the path exists before attempting to execute
@@ -115,7 +118,19 @@ public final class AntigravityService {
         }
 
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder(antigravityPath, path);
+            // Build the command with line number if available
+            ProcessBuilder processBuilder;
+            String displayPath = path;
+            
+            if (lineNumber > 0) {
+                // Use -g argument for file:line format
+                String fileWithLine = path + ":" + lineNumber;
+                processBuilder = new ProcessBuilder(antigravityPath, "-g", fileWithLine);
+                displayPath = fileWithLine;
+            } else {
+                processBuilder = new ProcessBuilder(antigravityPath, path);
+            }
+            
             processBuilder.redirectErrorStream(true);
 
             Process process = processBuilder.start();
@@ -134,7 +149,7 @@ public final class AntigravityService {
             }).start();
 
             showNotification("Antigravity",
-                    "Opening in Antigravity: " + path + "\nUsing: " + antigravityPath,
+                    "Opening in Antigravity: " + displayPath + "\nUsing: " + antigravityPath,
                     NotificationType.INFORMATION);
 
         } catch (IOException e) {

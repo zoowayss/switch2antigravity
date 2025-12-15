@@ -117,7 +117,7 @@ MIT License
 
 ## Author
 
-Zoowayss (zoowayss@gmail.com)
+zoowayss (zoowayss@gmail.com)
 
 ## Contributing
 
