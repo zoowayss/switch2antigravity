@@ -23,10 +23,10 @@
                 class="com.zoowayss.antigravity.OpenFileInAntigravityAction"
                 text="Open in Antigravity"
                 description="Open current file in Antigravity"
-                icon="AllIcons.Actions.Execute">
-            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+                 icon="/icons/openInAntigravity.svg">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
 
         <!-- Open Project in Antigravity -->
@@ -34,9 +34,9 @@
                 class="com.zoowayss.antigravity.OpenProjectInAntigravityAction"
                 text="Open Project in Antigravity"
                 description="Open entire project in Antigravity"
-                icon="AllIcons.Actions.Execute">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+                 icon="/icons/openInAntigravity.svg">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>
 
