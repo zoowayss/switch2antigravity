@@ -1,39 +1,64 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.16.1"
+    id("org.jetbrains.intellij.platform") version "2.14.0"
 }
 
-group = "com.zoowayss.antigravity"
-version = "1.0.1"
+group = providers.gradleProperty("pluginGroup").get()
+version = providers.gradleProperty("pluginVersion").get()
 
 repositories {
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
-intellij {
-    version.set("2023.1")
-    type.set("IC") // IntelliJ IDEA Community Edition
-    plugins.set(listOf())
+val platformLocalPath = providers.gradleProperty("platformLocalPath")
+
+dependencies {
+    intellijPlatform {
+        if (platformLocalPath.isPresent) {
+            local(platformLocalPath.get())
+        } else {
+            create(
+                providers.gradleProperty("platformType"),
+                providers.gradleProperty("platformVersion")
+            )
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 tasks {
-    withType<JavaCompile> {
+    withType<JavaCompile>().configureEach {
+        options.encoding = "UTF-8"
         sourceCompatibility = "17"
         targetCompatibility = "17"
     }
+}
 
-    patchPluginXml {
-        sinceBuild.set("231")
-        untilBuild.set("241.*")
+intellijPlatform {
+    pluginConfiguration {
+        version = providers.gradleProperty("pluginVersion")
+
+        ideaVersion {
+            sinceBuild = providers.gradleProperty("pluginSinceBuild")
+            untilBuild = providers.gradleProperty("pluginUntilBuild")
+        }
     }
 
-    signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+    signing {
+        certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
+        privateKey = providers.environmentVariable("PRIVATE_KEY")
+        password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
     }
 
-    publishPlugin {
-        token.set(System.getenv("PUBLISH_TOKEN"))
+    publishing {
+        token = providers.environmentVariable("PUBLISH_TOKEN")
     }
 }

@@ -77,7 +77,7 @@ After setting the environment variable, restart IntelliJ IDEA for the changes to
 
 ## Requirements
 
-- IntelliJ IDEA 2023.1 or later
+- IntelliJ IDEA 2024.1 到 2025.2（含 252 分支）
 - Antigravity installed on your system
 
 ## Development
@@ -94,7 +94,13 @@ After setting the environment variable, restart IntelliJ IDEA for the changes to
 ./gradlew runIde
 ```
 
-This will start a new IntelliJ IDEA instance with the plugin installed.
+这会启动一个带有该插件的 IntelliJ IDEA 开发实例。
+
+如果你本机已经安装了 IntelliJ IDEA 2025.2（例如 `/Applications/IntelliJ IDEA.app`），推荐这样运行，以便直接对齐本地 IDE：
+
+```bash
+./gradlew runIde -PplatformLocalPath="/Applications/IntelliJ IDEA.app"
+```
 
 ### Project Structure
 
